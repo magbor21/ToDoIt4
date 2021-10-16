@@ -9,13 +9,13 @@ namespace ToDoIt4
         {
             Console.WriteLine("Hello World!");
             Person person = null;
-            Person person2 = new Person("Sven", "Olsson");
+            //Person person2 = new Person("Sven", null);
             person = new Person("Kalle", "Banan");
 
             Console.WriteLine(person.FirstName);
             Console.WriteLine(person.PersonId);
-            Console.WriteLine(person2.FirstName);
-            Console.WriteLine(person2.PersonId);
+            // Console.WriteLine(person2.FirstName);
+            // Console.WriteLine(person2.PersonId);
 
 
         }

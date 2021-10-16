@@ -19,8 +19,8 @@ namespace ToDoIt4.Model
             get { return firstName; }
             set
             {
-                if (value.Length == 0)
-                    throw new ArgumentException("First Name can't be empty");
+                if (value == null || value.Length == 0)
+                    throw new ArgumentException("First Name can't be empty or null");
 
                 firstName = value;
             }
@@ -30,8 +30,8 @@ namespace ToDoIt4.Model
             get { return lastName; }
             set
             {
-                if (value.Length == 0)
-                    throw new ArgumentException("Last Name can't be empty");
+                if (value == null || value.Length == 0)
+                    throw new ArgumentException("Last Name can't be empty or null");
 
                 lastName = value;
             }

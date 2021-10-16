@@ -14,12 +14,12 @@ namespace ToDoIt4.Tests.ModelTests
             var exception = Record.Exception(() => new Person("Sven", ""));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentException>(exception);
-            Assert.Equal("Last Name can't be empty", exception.Message);
+            Assert.Equal("Last Name can't be empty or null", exception.Message);
 
         }
 
         [Fact]
-        public void PersonIdentityNmber()
+        public void PersonIdentityNumber()
         {
             Person person = null;
             Person person2 = new Person("Sven", "Olsson");
