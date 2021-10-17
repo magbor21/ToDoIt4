@@ -7,25 +7,18 @@ namespace ToDoIt4.Data
     public class ToDoSequencer
     {
         private static int toDoId = 0;
-        static int nextToDoId{ get {return ++toDoId; } }
 
         public int NextToDoId()
         {
-            return nextToDoId;
+            return ++toDoId;
         }
 
 
-        static int reset()
+        public static int Reset()
         { 
             toDoId = 0;
             return toDoId;
         }
-        
-        public int Reset()
-        {
-            return reset();
-        }
-
 
     }
 }

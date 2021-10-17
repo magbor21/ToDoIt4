@@ -22,7 +22,7 @@ namespace ToDoIt4.Tests.DataTests
             int toDoSequencer2Id = toDoSequencer2.NextToDoId(); // 3     
             Assert.Equal(3, toDoSequencer2Id);
 
-            toDoSequencer1.Reset();                    // 0   Resets on toDoSequencer1
+            ToDoSequencer.Reset();                              // 0   Resets on toDoSequencer1
             toDoSequencer2Id = toDoSequencer2.NextToDoId();     // 1   Gets a new number from toDoSequencer2 
             Assert.Equal(1, toDoSequencer2Id);
 

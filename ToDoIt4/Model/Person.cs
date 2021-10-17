@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ToDoIt4.Data;
 
 namespace ToDoIt4.Model
 {
     public class Person
     {
-        private static int idCounter = 0;
         private readonly int personId;
+         
         private string firstName;
         private string lastName;
         
         public int PersonId
-        { get { return personId; } }
+        { 
+            get { return personId; }
+           
+        }
+
 
         public string FirstName
         {
@@ -38,11 +43,19 @@ namespace ToDoIt4.Model
         }
 
 
-        public Person(string firstName, string lastName)
+        public Person(string firstName, string lastName, int personId)
         {
-            this.personId = ++idCounter;
+            this.personId = personId;
             this.FirstName = firstName;
             this.LastName = lastName;
+
+        }
+
+        public Person(string firstName, string lastName)
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.personId = PersonSequencer.NextPersonId();
 
         }
     }

@@ -7,25 +7,18 @@ namespace ToDoIt4.Data
     public class PersonSequencer
     {
         private static int personId = 0;
-        static int nextPersonId{ get {return ++personId; } }
 
-        public int NextPersonId()
+        public static int NextPersonId()
         {
-            return nextPersonId;
+            return ++personId;
         }
 
 
-        static int reset()
+        public static int Reset()
         { 
             personId = 0;
-            return personId;
+            return 0;
         }
-        
-        public int Reset()
-        {
-            return reset();
-        }
-
 
     }
 }
