@@ -23,10 +23,10 @@ namespace ToDoIt4.Data
         public Person FindById(int personId)
         {
             for (int i = 0; i < personArray.Length; i++) // will skip if array is empty
-                if (personArray[i].PersonId == personId)
+                if (personArray[i].PersonId == personId)                
                     return personArray[i];
 
-            throw new ArgumentOutOfRangeException("There is no Person with that ID among the People");
+            throw new ArgumentOutOfRangeException("personId","There is no Person with that ID among the People");
         }
 
         public Person NewPerson(string firstName, string lastName)
@@ -58,8 +58,9 @@ namespace ToDoIt4.Data
         {
             if (personArray.Length > 0)
             {
-                Array.Clear(personArray, 0, personArray.Length);
-                Array.Resize(ref personArray, 0);
+                Array.Clear(personArray, 0, personArray.Length); // removes the entries
+                Array.Resize(ref personArray, 0);   //resizes the array
+                PersonSequencer.Reset();
             }
             
         }

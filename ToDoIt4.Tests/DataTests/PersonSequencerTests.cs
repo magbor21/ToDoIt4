@@ -20,7 +20,7 @@ namespace ToDoIt4.Tests.DataTests
 
             // PersonSequencer personSequencer2 = new PersonSequencer(); // personID already set (static)
             int cs2Id = PersonSequencer.NextPersonId(); // 3     
-            Assert.Equal(7, cs2Id);
+            Assert.Equal(3, cs2Id);
 
             PersonSequencer.Reset();                     // 0   Resets on personSequencer
             cs2Id = PersonSequencer.NextPersonId();     // 1   Gets a new number from personSequencer2 
