@@ -21,11 +21,11 @@ namespace ToDoIt4.Tests.ModelTests
         [Fact]
         public void PersonIdentityNumber()
         {
-            Person person = null;
+            //Person person = null;
             Person person2 = new Person("Sven", "Olsson");
-            person = new Person("Kalle", "Banan");
+            Person person = new Person("Kalle", "Banan");
 
-            Assert.Equal(2, person.PersonId);
+            Assert.Equal(3, person.PersonId);
 
         }
 

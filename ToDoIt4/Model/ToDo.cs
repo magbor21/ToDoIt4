@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ToDoIt4.Model
 {
-    class ToDo
+    public class ToDo
     {
 
         private readonly int todoId;
@@ -14,8 +14,8 @@ namespace ToDoIt4.Model
 
         public ToDo(int todoId, string description)
         {
-            if (todoId = null)
-                throw new ArgumentNullException("The ToDo ID can't be null");
+            if (todoId < 0)
+                throw new ArgumentException("The ToDo ID can't be a negative value");
             this.todoId = todoId;
 
             if (description == null || description.Length == 0)

@@ -11,17 +11,18 @@ namespace ToDoIt4.Tests.ModelTests
         [Fact]
         public void ConstructorToDoId()
         {
-            var exception = Record.Exception(() => new (null, "Städa garderoben"));
+            
+            var exception = Record.Exception(() => new ToDo(-54, "Städa garderoben"));
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
-            Assert.Equal("The ToDo ID can't be null", exception.Message);
+            Assert.IsType<ArgumentException>(exception);
+            Assert.Equal("The ToDo ID can't be a negative value", exception.Message);
 
         }
 
         [Fact]
         public void ConstructorDescription()
         {
-            var exception = Record.Exception(() => new(23,"");
+            var exception = Record.Exception(() => new ToDo(23,""));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentException>(exception);
             Assert.Equal("Description can't be empty or null", exception.Message);
