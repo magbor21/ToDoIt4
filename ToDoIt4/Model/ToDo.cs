@@ -9,7 +9,7 @@ namespace ToDoIt4.Model
     {
 
         private readonly int todoId;
-        private string description;
+        private readonly string description;
         private bool done;
         private Person assignee;
 
@@ -41,6 +41,32 @@ namespace ToDoIt4.Model
             this.done = false;
         }
 
+        public Person AssignedTo
+        { get { return assignee; } }
+
+        public bool Assign(Person person)
+        {
+            if (person != null)
+            {
+                this.assignee = person;
+                return true;
+            }
+            return false;
+        }
+
+
+        public bool IsDone
+        { get { return done; } }
+        
+        
+        
+        public void DoneIt()
+        {
+            if (this.assignee == null)
+                throw new Exception("Unassigned ToDo items can't be completed");
+            //else
+            done = true;
+        }
 
 
     }

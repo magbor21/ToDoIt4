@@ -30,13 +30,14 @@ namespace ToDoIt4.Tests.DataTests
             Person zach = null; // 4
             zach = people.NewPerson("Zachary","Ruane"); // 5 success
             Assert.Equal("Zachary", zach.FirstName);
-            Assert.Equal(5, zach.PersonId); // <- 5
+            Assert.Equal(4, zach.PersonId); // <- 5
 
             Assert.Equal(2, people.Size()); // 2
 
             people.Clear();
 
         }
+        
         [Fact]
         public void FindingPeople()
         {
@@ -51,7 +52,7 @@ namespace ToDoIt4.Tests.DataTests
             people2.NewPerson("Max", "Miller");
             people2.NewPerson("Zachary", "Ruane");
 
-            Person foundPerson = people2.FindById(4);
+            Person foundPerson = people2.FindById(3);
             Assert.Equal("Broden", foundPerson.FirstName); 
             
             var exception = Record.Exception(() => people2.FindById(11)); 
@@ -63,7 +64,7 @@ namespace ToDoIt4.Tests.DataTests
 
 
         }
-
+        
 
     }
 }

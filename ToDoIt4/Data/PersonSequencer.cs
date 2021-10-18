@@ -8,7 +8,7 @@ namespace ToDoIt4.Data
     {
         private static int personId = 0;
 
-        public static int NextPersonId()
+        public static int NextPersonId() 
         {
             return ++personId;
         }

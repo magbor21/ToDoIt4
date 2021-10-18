@@ -39,13 +39,13 @@ namespace ToDoIt4.Data
             {
                 idIsUsed = false;
                 newID = PersonSequencer.NextPersonId();  //Sets a new number
-
-                for (int i = 0; i < personArray.Length; i++) //checks if it has already been used
+                
+                for (int j = 0; j < personArray.Length; j++) //checks if it has already been used
                 {
-                    if (personArray[i].PersonId == newID)
+                    if (personArray[j].PersonId == newID)
                         idIsUsed = true;
                 }
-
+                
             } while (idIsUsed);
             
             Person newPerson = new Person(firstName, lastName, newID); //Any exceptions gets thrown from Person

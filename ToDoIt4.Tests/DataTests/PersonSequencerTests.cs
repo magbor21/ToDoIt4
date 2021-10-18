@@ -8,7 +8,7 @@ namespace ToDoIt4.Tests.DataTests
 {
     public class PersonSequencerTests
     {
-
+        
         [Fact]
         public void ConstructorAndNextNumber()
         {
@@ -16,7 +16,7 @@ namespace ToDoIt4.Tests.DataTests
 
             int cs1Id = PersonSequencer.NextPersonId(); // 1
             Assert.Equal(1, cs1Id);
-            cs1Id = PersonSequencer.NextPersonId();     // 2
+            PersonSequencer.NextPersonId();     // 2
 
             // PersonSequencer personSequencer2 = new PersonSequencer(); // personID already set (static)
             int cs2Id = PersonSequencer.NextPersonId(); // 3     
@@ -27,5 +27,6 @@ namespace ToDoIt4.Tests.DataTests
             Assert.Equal(1, cs2Id);
 
         }
+        
     }
 }

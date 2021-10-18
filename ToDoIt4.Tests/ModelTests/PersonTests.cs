@@ -17,19 +17,21 @@ namespace ToDoIt4.Tests.ModelTests
             Assert.Equal("Last Name can't be empty or null", exception.Message);
 
         }
-
+        
         [Fact]
         public void PersonIdentityNumber()
         {
             Person person = null;
-            Person person2 = new Person("Sven", "Olsson");
+            new Person("Sven", "Olsson");
+            new Person("Tom", "Olsson");
+            new Person("Kalle", "Olsson");
             person = new Person("Kalle", "Banan");
 
-            Assert.Equal(3, person.PersonId);
+            Assert.Equal(4, person.PersonId);
 
         }
 
-
+        
 
     }
 }

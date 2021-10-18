@@ -8,13 +8,13 @@ namespace ToDoIt4.Tests.DataTests
 {
     public class ToDoSequencerTests
     {
-
+        
         [Fact]
         public void ConstructorAndNextNumber()
         {
             int toDoSequencer1Id = ToDoSequencer.NextToDoId(); // 1
             Assert.Equal(1, toDoSequencer1Id);
-            toDoSequencer1Id = ToDoSequencer.NextToDoId();     // 2
+            ToDoSequencer.NextToDoId();     // 2
 
 
             int toDoSequencer2Id = ToDoSequencer.NextToDoId(); // 3     
@@ -25,5 +25,6 @@ namespace ToDoIt4.Tests.DataTests
             Assert.Equal(1, toDoSequencer2Id);
 
         }
+        
     }
 }
