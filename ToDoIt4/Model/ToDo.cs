@@ -5,7 +5,7 @@ using ToDoIt4.Data;
 
 namespace ToDoIt4.Model
 {
-    public class ToDo
+    public class ToDo // class for single ToDo items
     {
 
         private readonly int todoId;
@@ -16,11 +16,11 @@ namespace ToDoIt4.Model
         public int ToDoId
         { get { return todoId; } }
 
-        public string Description
+        public string Description // Descriptions can only be set at Creation
         { get { return description; } }
 
 
-        public ToDo(int todoId, string description)
+        public ToDo(int todoId, string description)   // Creates a ToDo item
         {
             if (todoId < 0)
                 throw new ArgumentException("The ToDo ID can't be a negative value");
@@ -30,21 +30,21 @@ namespace ToDoIt4.Model
                 throw new ArgumentException("Description can't be empty or null");
 
             this.description = description;
-            this.done = false;
+            this.done = false; // New items can't be done
 
         }
 
-        public ToDo(string description)
+        public ToDo(string description) // Collects a todoID from ToDoSequencer and uses that at creation
         {
             this.todoId = ToDoSequencer.NextToDoId();
             this.description = description;
             this.done = false;
         }
 
-        public Person AssignedTo
+        public Person AssignedTo // who is this item assigned to?
         { get { return assignee; } }
 
-        public bool Assign(Person person)
+        public bool Assign(Person person) //Assign a person to this item
         {
             if (person != null)
             {
@@ -55,12 +55,12 @@ namespace ToDoIt4.Model
         }
 
 
-        public bool IsDone
+        public bool IsDone // Has the item been completed by the assignee
         { get { return done; } }
         
         
         
-        public void DoneIt()
+        public void DoneIt() // Checks items as completed
         {
             if (this.assignee == null)
                 throw new Exception("Unassigned ToDo items can't be completed");

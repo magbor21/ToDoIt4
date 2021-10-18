@@ -78,43 +78,43 @@ namespace ToDoIt4.Data
 
         }
 
-        public ToDo[] FindByDoneStatus(bool doneStatus)
+        public ToDo[] FindByDoneStatus(bool doneStatus) 
         {
             ToDo[] resultArray = new ToDo[0];
 
             for(int m = 0; m < toDoArray.Length; m++)
             {
-                if(toDoArray[m].IsDone == doneStatus)
+                if(toDoArray[m].IsDone == doneStatus) // Finds all items that are/aren't done.
                 {
                     Array.Resize(ref resultArray, resultArray.Length + 1);
-                    resultArray[resultArray.Length - 1] = toDoArray[m];
+                    resultArray[resultArray.Length - 1] = toDoArray[m]; // adds items to a new array
                 }
 
             }
 
-            return resultArray;
+            return resultArray; // return new array
 
         }
 
-        public ToDo[] FindByAssignee(int personId)
+        public ToDo[] FindByAssignee(int personId) // finds items based on who it is assigned to
         {
             ToDo[] resultArray = new ToDo[0];
 
             for (int n = 0; n < toDoArray.Length; n++)
             {
-                if (toDoArray[n].AssignedTo.PersonId == personId)
+                if (toDoArray[n].AssignedTo.PersonId == personId)  //finds items
                 {
                     Array.Resize(ref resultArray, resultArray.Length + 1);
-                    resultArray[resultArray.Length - 1] = toDoArray[n];
+                    resultArray[resultArray.Length - 1] = toDoArray[n];  // adds them to a new array
                 }
 
             }
 
-            return resultArray;
+            return resultArray; //Returns the new array
 
         }
 
-        public ToDo[] FindByAssignee(Person assignee)
+        public ToDo[] FindByAssignee(Person assignee) // the same as above but using a whole Person instead of just a number
         {
             ToDo[] resultArray = new ToDo[0];
 
@@ -132,7 +132,7 @@ namespace ToDoIt4.Data
 
         }
 
-        public ToDo[] FindUnassignedTodoItems()
+        public ToDo[] FindUnassignedTodoItems() // finds and returns todo items not assigned to anyone yet
         {
             ToDo[] resultArray = new ToDo[0];
 
@@ -150,18 +150,39 @@ namespace ToDoIt4.Data
 
         }
 
-        public bool DoneIt(int todoID)
+        public bool DoneIt(int todoID) // marks completed ToDo items as done
         {
             for (int s = 0; s < toDoArray.Length; s++)
             {
 
-                if (toDoArray[s].ToDoId == todoID && toDoArray[s].AssignedTo != null)
+                if ((toDoArray[s].ToDoId == todoID) && (toDoArray[s].AssignedTo != null)) //only assigned items can be completed
                 {
                     toDoArray[s].DoneIt();
                     return true;
                 }
             }
-            return false;
+            return false; 
+        }
+
+        public bool Remove(int todoId) // finds and removes a ToDo Item
+        {
+            for (int i = 0; i < toDoArray.Length; i++)
+            {
+                if (toDoArray[i].ToDoId == todoId) //finds it
+                {
+                    for (int j = i + 1; j < toDoArray.Length; j++)
+                    {
+                        toDoArray[j - 1] = toDoArray[j]; // moves the rest up one position
+                    }
+
+                    Array.Resize(ref toDoArray, toDoArray.Length - 1); //deletes the last post
+                    return true;
+
+                }
+
+            }
+            return false; // could not find anything to remove
+
         }
 
     }

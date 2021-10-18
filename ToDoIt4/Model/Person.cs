@@ -5,7 +5,7 @@ using ToDoIt4.Data;
 
 namespace ToDoIt4.Model
 {
-    public class Person
+    public class Person // Class for individual persons
     {
         private readonly int personId;
          
@@ -43,7 +43,7 @@ namespace ToDoIt4.Model
         }
 
 
-        public Person(string firstName, string lastName, int personId)
+        public Person(string firstName, string lastName, int personId) // creates a person with a personID if given
         {
             this.personId = personId;
             this.FirstName = firstName;
@@ -51,7 +51,7 @@ namespace ToDoIt4.Model
 
         }
 
-        public Person(string firstName, string lastName)
+        public Person(string firstName, string lastName) // gets a personID from PersonSequencer and vreates a person
         {
             this.FirstName = firstName;
             this.LastName = lastName;

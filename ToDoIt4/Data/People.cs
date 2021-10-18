@@ -7,14 +7,14 @@ namespace ToDoIt4.Data
 {
     public class People
     {
-        private static Person[] personArray = new Person[0];
+        private static Person[] personArray = new Person[0]; // Persons are stored here
 
         public int Size()
         {
             return personArray.Length;
         }
 
-        public Person[] FindAll()
+        public Person[] FindAll() //returns all the People
         {
             return personArray;
 
@@ -24,15 +24,14 @@ namespace ToDoIt4.Data
         {
             for (int i = 0; i < personArray.Length; i++) // will skip if array is empty
                 if (personArray[i].PersonId == personId)                
-                    return personArray[i];
+                    return personArray[i];  //returns the person
 
-            throw new ArgumentOutOfRangeException("personId","There is no Person with that ID among the People");
+            throw new ArgumentOutOfRangeException("personId","There is no Person with that ID among the People"); // Can't find person
         }
 
-        public Person NewPerson(string firstName, string lastName)
+        public Person NewPerson(string firstName, string lastName) //Adds a new Person
         {
-            // PersonSequencer personSequencer = new PersonSequencer();
-            
+                       
             int newID;
             bool idIsUsed;
             do
@@ -49,12 +48,13 @@ namespace ToDoIt4.Data
             } while (idIsUsed);
             
             Person newPerson = new Person(firstName, lastName, newID); //Any exceptions gets thrown from Person
-            Array.Resize(ref personArray, personArray.Length + 1);
+
+            Array.Resize(ref personArray, personArray.Length + 1); //resizes and adds person at the end
             personArray[personArray.Length - 1] = newPerson;
             return newPerson;
         }
 
-        public void Clear()
+        public void Clear() //removes all the persons from People
         {
             if (personArray.Length > 0)
             {
@@ -63,6 +63,27 @@ namespace ToDoIt4.Data
                 PersonSequencer.Reset();
             }
             
+        }
+
+        public bool Remove(int personId) // Finds and removes a single person
+        {
+            for(int i = 0; i < personArray.Length;i++) 
+            {
+                if (personArray[i].PersonId == personId) // finds person
+                {
+                    for(int j=i+1;j< personArray.Length;j++) 
+                    {
+                        personArray[j - 1] = personArray[j]; // moves everyone after up one in the array
+                    }
+
+                    Array.Resize(ref personArray, personArray.Length - 1); // removes the last position of the array
+                    return true;
+
+                }
+
+            }
+            return false;
+
         }
     }
 }

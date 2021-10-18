@@ -9,7 +9,7 @@ namespace ToDoIt4.Tests.DataTests
 {
     public class ToDoTests
     {
-        
+
         [Fact]
         public void AddingToDoItems()
         {
@@ -23,45 +23,43 @@ namespace ToDoIt4.Tests.DataTests
             Assert.Equal("Description can't be empty or null", exception.Message);
 
 
-            ToDo car = null; // 3
-            toDoItems.NewToDo("Wash the bear");
+            ToDo car = null;
+            toDoItems.NewToDo("Wash the bear"); // 3 success
 
             car = toDoItems.NewToDo("Wash the car"); // 4 success
 
             Assert.Equal("Wash the car", car.Description);
             Assert.Equal(4, car.ToDoId); // <- 4
 
-            Assert.Equal(3, toDoItems.Size()); // 2
+            Assert.Equal(3, toDoItems.Size()); // 3
 
-            toDoItems.Clear();
 
         }
-        
+
 
         [Fact]
-        public void FindingToDoById()
+        public void FindingToDoById() 
         {
             ToDoItems toDoItems2 = new ToDoItems();
             ToDo[] toDos = toDoItems2.FindAll();
-            Assert.Empty(toDos);
+            Assert.Empty(toDos); // starts with empty ToDoItems
 
             toDoItems2.NewToDo("Walk");
             toDoItems2.NewToDo("Run");
-            new ToDo("test1");
+            new ToDo("Not included in ToDoItems");
             toDoItems2.NewToDo("Jump");
             toDoItems2.NewToDo("Land");
             toDoItems2.NewToDo("Duck");
             toDoItems2.NewToDo("Zach");
 
-            ToDo[] tabort = toDoItems2.FindAll();
-            Assert.Equal(6,tabort.Length);
-            Assert.Equal(7, tabort[5].ToDoId);
+            toDos = toDoItems2.FindAll();
+            Assert.Equal(6, toDos.Length); // six items, not seven
+            Assert.Equal(7, toDos[5].ToDoId); // last todoId = 7
 
 
+            ToDo foundTodo = toDoItems2.FindById(4); // find Jump
+            Assert.Equal("Jump", foundTodo.Description);
 
-            ToDo foundTodo = toDoItems2.FindById(4);
-            Assert.Equal("Jump", foundTodo.Description); 
-            
             var exception = Record.Exception(() => toDoItems2.FindById(12)); 
             Assert.NotNull(exception);
             Assert.IsType<ArgumentOutOfRangeException>(exception);
@@ -72,9 +70,9 @@ namespace ToDoIt4.Tests.DataTests
 
 
         [Fact]
-        public void FindByDone()
+        public void FindByNotDone()
         {
-            ToDoItems toDoItems3 = new ToDoItems();
+            ToDoItems toDoItems3 = new ToDoItems(); // Adds ToDo Items
             toDoItems3.NewToDo("Walk");
             toDoItems3.NewToDo("Run");
             toDoItems3.NewToDo("Jump");
@@ -82,7 +80,7 @@ namespace ToDoIt4.Tests.DataTests
             toDoItems3.NewToDo("Duck");
             toDoItems3.NewToDo("Zach");
 
-            People people3 = new People();
+            People people3 = new People(); // Adds persons
             people3.NewPerson("Tom", "Armstrong");
             people3.NewPerson("Mark", "Bonanno");
             people3.NewPerson("Broden", "Kelly");
@@ -91,29 +89,29 @@ namespace ToDoIt4.Tests.DataTests
             people3.NewPerson("Zachary", "Ruane");
 
             for (int q = 1; q < 7; q++)
-                toDoItems3.Assign(q, people3.FindById(q));
+                toDoItems3.Assign(q, people3.FindById(q)); // adds first person to first ToDo and so on.
 
-            for (int r = 0; r < 7; r += 2)
-                toDoItems3.DoneIt(r);
+            for (int r = 0; r < 7; r += 2) // 2, 4 and 6 are Done
+                toDoItems3.DoneIt(r); 
 
-            ToDo[] todoResult = toDoItems3.FindByDoneStatus(false);
+            ToDo[] todoResult = toDoItems3.FindByDoneStatus(false); //returned 1, 3 and 5
 
             Assert.Equal("Tom", todoResult[0].AssignedTo.FirstName);
             Assert.Equal("Broden", todoResult[1].AssignedTo.FirstName);
             Assert.Equal("Max", todoResult[2].AssignedTo.FirstName);
 
         }
-        
+
         [Fact]
         public void FindByAssignee()
         {
             ToDoItems toDoItems3 = new ToDoItems();
-            toDoItems3.NewToDo("Walk");
-            toDoItems3.NewToDo("Run");
-            toDoItems3.NewToDo("Jump");
-            toDoItems3.NewToDo("Land");
-            toDoItems3.NewToDo("Duck");
-            toDoItems3.NewToDo("Zach");
+            toDoItems3.NewToDo("Walk"); // Tom
+            toDoItems3.NewToDo("Run");  // Mark
+            toDoItems3.NewToDo("Jump"); // Broden
+            toDoItems3.NewToDo("Land"); // Tom
+            toDoItems3.NewToDo("Duck"); // Mark
+            toDoItems3.NewToDo("Zach"); // Broden
 
             People people3 = new People();
             people3.NewPerson("Tom", "Armstrong");
@@ -121,16 +119,16 @@ namespace ToDoIt4.Tests.DataTests
             people3.NewPerson("Broden", "Kelly");
 
             for (int q = 0; q < 6; q++)
-                toDoItems3.Assign((q+1), people3.FindById(q%3+1)); // 1 2 3 1 2 3
+                toDoItems3.Assign((q + 1), people3.FindById(q % 3 + 1)); // 1 2 3 1 2 3
 
             ToDo[] todoResult = toDoItems3.FindByAssignee(3); // Broden
 
-            Assert.Equal("Broden", todoResult[0].AssignedTo.FirstName);
+            Assert.Equal("Broden", todoResult[0].AssignedTo.FirstName); // Broden has 2 things to do
             Assert.Equal(2, todoResult.Length);
 
             ToDo[] todoResult2 = toDoItems3.FindByAssignee(people3.FindById(1));
 
-            Assert.Equal("Tom", todoResult2[0].AssignedTo.FirstName);
+            Assert.Equal("Tom", todoResult2[0].AssignedTo.FirstName); // Tom has 2 things to do
             Assert.Equal(2, todoResult2.Length);
         }
 
@@ -162,6 +160,34 @@ namespace ToDoIt4.Tests.DataTests
 
         }
 
+        [Fact]
+        public void RemoveItems()
+        {
+            ToDoItems toDoItems2 = new ToDoItems();
+            ToDo[] toDos = toDoItems2.FindAll();
+            Assert.Empty(toDos);
 
+            toDoItems2.NewToDo("Walk");
+            toDoItems2.NewToDo("Run"); // to be removed
+            toDoItems2.NewToDo("Jump");
+            toDoItems2.NewToDo("Land");
+            toDoItems2.NewToDo("Duck");
+            toDoItems2.NewToDo("Zach");
+
+            toDos = toDoItems2.FindAll();
+            Assert.Equal(6, toDos.Length);
+
+            toDoItems2.Remove(2); // Run
+
+            toDos = toDoItems2.FindAll();
+            Assert.Equal(5, toDos.Length);
+
+            var exception = Record.Exception(() => toDoItems2.FindById(2)); // it is gone
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentOutOfRangeException>(exception);
+            Assert.Equal("There is no ToDo with that ID among the ToDoItems (Parameter 'toDoId')", exception.Message);
+
+
+        }
     }
 }
